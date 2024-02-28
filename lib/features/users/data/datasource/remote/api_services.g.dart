@@ -27,7 +27,7 @@ class _ApiServices implements ApiServices {
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<HttpResponse<List<UserModel>>>(Options(
       method: 'GET',
       headers: _headers,
@@ -44,8 +44,9 @@ class _ApiServices implements ApiServices {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => UserModel.fromJson(i as Map<String, dynamic>))
+    List<UserModel> value = _result.data!['data']
+        .map<UserModel>(
+            (dynamic i) => UserModel.fromJson(i as Map<String, dynamic>))
         .toList();
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;

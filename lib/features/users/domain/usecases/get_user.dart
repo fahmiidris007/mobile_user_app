@@ -9,7 +9,7 @@ class GetUserUseCase implements UseCase<DataState<List<UserEntity>>, void> {
   GetUserUseCase(this._userRepository);
 
   @override
-  Future<DataState<List<UserEntity>>> call(void params) {
+  Future<DataState<List<UserEntity>>> call({void params}) {
     return _userRepository.getUserList();
   }
 }

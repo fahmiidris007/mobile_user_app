@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_user_app/configs/theme/app_themes.dart';
+import 'package:mobile_user_app/features/users/presentation/bloc/users/remote/get/get_user_bloc.dart';
+import 'package:mobile_user_app/features/users/presentation/pages/user_list_page.dart';
+import 'package:mobile_user_app/injection_container.dart';
 
-void main() {
+Future<void> main() async {
+  await initializeDependencies();
   runApp(const MyApp());
 }
 
@@ -9,19 +15,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Mobile User App'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<GetUserBloc>(
+          create: (context) => s1()..add(const GetUser()),
         ),
-        body: const Center(
-          child: Text('Initial Project'),
-        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: theme(),
+        home: const UserListPage(),
       ),
     );
   }
