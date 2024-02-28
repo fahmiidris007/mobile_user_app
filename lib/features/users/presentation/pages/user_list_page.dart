@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/features/users/presentation/bloc/users/remote/get/get_user_bloc.dart';
+import 'package:mobile_user_app/features/users/presentation/widgets/user_list_tile.dart';
 
 class UserListPage extends StatefulWidget {
   const UserListPage({super.key});
@@ -36,10 +37,20 @@ class _UserListPageState extends State<UserListPage> {
           );
         } else if (state is GetUserSuccess) {
           return ListView.builder(
-            itemCount: state.users!.length,
+            shrinkWrap: true,
+            itemCount: state.users?.data?.length ?? 0,
             itemBuilder: (_, index) {
+              var user = state.users;
               return ListTile(
-                title: Text('$index'),
+                contentPadding: const EdgeInsets.all(8),
+                leading: Image.network(
+                  user!.data![index].avatar!,
+                  width: 50,
+                  fit: BoxFit.cover,
+                ),
+                title: Text(
+                    '${user.data![index].firstName} ${user.data![index].lastName}'),
+                subtitle: Text(user.data![index].email!),
               );
             },
           );
