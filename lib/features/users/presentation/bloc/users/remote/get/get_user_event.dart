@@ -1,9 +1,10 @@
 part of 'get_user_bloc.dart';
 
-sealed class GetUserEvent {
+abstract class GetUserEvent extends Equatable {
   const GetUserEvent();
 }
 
-class GetUser extends GetUserEvent {
-  const GetUser();
+class GetUser extends GetUserEvent{
+  @override
+  List<Object?> get props => [];
 }

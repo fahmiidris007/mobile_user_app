@@ -1,26 +1,26 @@
 import 'package:bloc/bloc.dart';
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
-import 'package:mobile_user_app/core/resources/data_state.dart';
-import 'package:mobile_user_app/features/users/domain/entities/user_list.dart';
-import 'package:mobile_user_app/features/users/domain/usecases/get_user.dart';
+import 'package:flutter/material.dart';
+import 'package:mobile_user_app/features/users/data/models/user.dart';
+import 'package:mobile_user_app/features/users/data/services/user_service.dart';
 
 part 'get_user_event.dart';
 part 'get_user_state.dart';
 
 class GetUserBloc extends Bloc<GetUserEvent, GetUserState> {
-  final GetUserUseCase _getUserUseCase;
-  GetUserBloc(this._getUserUseCase) : super(const GetUserLoading()) {
-    on<GetUser>(onGetUser);
+  GetUserBloc({required this.crudService}) : super(GetUserLoading()) {
+    on<GetUser>(_onGetUser);
   }
-  void onGetUser(GetUser event, Emitter<GetUserState> emit) async {
-    final dataState = await _getUserUseCase();
-    if (dataState is DataSuccess && dataState.data != null) {
-      print('DataBlocSuccess. Response: ${dataState.data}');
-      emit(GetUserSuccess(dataState.data!));
-    } else if (dataState is DataFailed) {
-      print('DataBlocFailed. Response: ${dataState.error}');
-      emit(GetUserFailed(dataState.error!));
+  final CrudService crudService;
+
+  Future<void> _onGetUser(GetUser event, Emitter<GetUserState> emit) async {
+    emit(GetUserLoading());
+    try {
+      final result = await crudService.getUserList();
+      emit(GetUserLoaded(user: result));
+    } catch (_) {
+      emit(GetUserError());
     }
   }
 }
+

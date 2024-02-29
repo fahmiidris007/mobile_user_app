@@ -12,6 +12,13 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetUserBloc>().add(GetUser());
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -50,40 +57,29 @@ class _UserListPageState extends State<UserListPage> {
     return TabBarView(
       children: <Widget>[
         Center(
-          child: BlocBuilder<GetUserBloc, GetUserState>(
-            builder: (_, state) {
-              if (state is GetUserLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is GetUserSuccess) {
-                return Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text('Total: ${state.users?.total} items' , style: TextStyle(color: onPrimaryColor)),
-                      Expanded(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: state.users?.data.length,
-                          itemBuilder: (_, index) {
-                            var user = state.users;
-                            return UserListTile(user: user, index: index);
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              } else if (state is GetUserFailed) {
-                return const Center(
-                  child: Icon(Icons.refresh),
-                );
-              }
-              return const SizedBox();
-            },
-          ),
+          child: BlocBuilder<GetUserBloc, GetUserState>(builder: (context, state) {
+            if (state is GetUserLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is GetUserLoaded) {
+              return Center(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.user.length,
+                  itemBuilder: (context, index) {
+                    print("Item Count: ${index}");
+                    return UserListTile(
+                      user: state.user[index],
+                      index: index,
+                    );
+                  },
+                ),
+              );
+            } else if (state is GetUserError) {
+              return const Text('Something went wrong!');
+            }else{
+              return const Text('Something went wrong!');
+            }
+          }),
         ),
         Center(
           child: const Text('Selected'),

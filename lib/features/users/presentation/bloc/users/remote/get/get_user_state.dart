@@ -1,23 +1,26 @@
 part of 'get_user_bloc.dart';
 
-sealed class GetUserState extends Equatable {
-  final UserListEntity? users;
-  final DioException? error;
+@immutable
+sealed  class GetUserState extends Equatable {
+  const GetUserState();
+}
 
-  const GetUserState({this.users, this.error});
-
+class GetUserLoading extends GetUserState{
   @override
-  List<Object> get props => [users!, error!];
+
+  List<Object?> get props => [];
 }
 
-class GetUserLoading extends GetUserState {
-  const GetUserLoading();
+class GetUserLoaded extends GetUserState{
+  const GetUserLoaded({this.user = const <User>[]});
+
+  final List<User> user;
+  @override
+  List<Object?> get props => [user];
+
 }
 
-class GetUserSuccess extends GetUserState {
-  const GetUserSuccess(UserListEntity users) : super(users: users);
-}
-
-class GetUserFailed extends GetUserState {
-  const GetUserFailed(DioException error) : super(error: error);
+class GetUserError extends GetUserState {
+  @override
+  List<Object> get props => [];
 }
