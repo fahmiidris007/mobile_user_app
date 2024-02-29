@@ -21,14 +21,14 @@ class _ApiServices implements ApiServices {
   String? baseUrl;
 
   @override
-  Future<HttpResponse<List<UserModel>>> getUserList({int? page}) async {
+  Future<HttpResponse<UserListModel>> getUserList({int? page}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'page': page};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<HttpResponse<List<UserModel>>>(Options(
+        _setStreamType<HttpResponse<UserListModel>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -44,10 +44,9 @@ class _ApiServices implements ApiServices {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    List<UserModel> value = _result.data!['data']
-        .map<UserModel>(
-            (dynamic i) => UserModel.fromJson(i as Map<String, dynamic>))
-        .toList();
+    print('API Response: ${_result.data}');
+    final value = UserListModel.fromJson(_result.data!);
+    print('API value: ${value}');
     final httpResponse = HttpResponse(value, _result);
     return httpResponse;
   }

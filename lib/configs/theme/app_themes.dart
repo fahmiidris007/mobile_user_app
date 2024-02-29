@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+const Color primaryColor = Color(0xFFFFFFFF);
+const Color secondaryColor = Color(0xFFFB6D3A);
+const Color onPrimaryColor = Color(0xFF9C9BA6);
+
 ThemeData theme() {
   return ThemeData(
     scaffoldBackgroundColor: Colors.white,
