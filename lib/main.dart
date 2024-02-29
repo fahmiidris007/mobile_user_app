@@ -3,12 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/data/services/user_service.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_bloc.dart';
-import 'package:mobile_user_app/features/crud/add_user/view/add_user_page.dart';
+import 'package:mobile_user_app/features/crud/add_user/view/add_page.dart';
 import 'package:mobile_user_app/features/crud/delete_user/bloc/delete_user_bloc.dart';
+import 'package:mobile_user_app/features/crud/delete_user/view/delete_page.dart';
 import 'package:mobile_user_app/features/crud/get_user/bloc/get_user_bloc.dart';
-import 'package:mobile_user_app/features/crud/get_user/view/user_list_page.dart';
+import 'package:mobile_user_app/features/crud/get_user/view/list_page.dart';
 import 'package:mobile_user_app/features/crud/update_user/bloc/update_user_bloc.dart';
-import 'package:mobile_user_app/features/crud/update_user/view/update_user_page.dart';
+import 'package:mobile_user_app/features/crud/update_user/view/update_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -43,6 +44,7 @@ class MyApp extends StatelessWidget {
             UserListPage.routeName: (context) => const UserListPage(),
             AddUserPage.routeName: (context) => const AddUserPage(),
             UpdateUserPage.routeName: (context) => const UpdateUserPage(),
+            DeletePage.routeName: (context) => const DeletePage(),
           }),
     );
   }

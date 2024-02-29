@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
-import 'package:mobile_user_app/features/crud/add_user/view/add_user_page.dart';
+import 'package:mobile_user_app/features/crud/add_user/view/add_page.dart';
 import 'package:mobile_user_app/features/crud/get_user/bloc/get_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/get_user/view/widgets/build_body.dart';
 import 'package:mobile_user_app/features/crud/get_user/view/widgets/user_list_tile.dart';

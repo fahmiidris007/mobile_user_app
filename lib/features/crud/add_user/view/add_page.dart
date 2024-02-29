@@ -4,7 +4,7 @@ import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_event.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_state.dart';
-import 'package:mobile_user_app/features/crud/get_user/view/user_list_page.dart';
+import 'package:mobile_user_app/features/crud/get_user/view/list_page.dart';
 
 class AddUserPage extends StatelessWidget {
   static const String routeName = '/addUser';
