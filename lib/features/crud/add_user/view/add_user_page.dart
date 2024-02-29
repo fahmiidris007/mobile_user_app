@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_event.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_state.dart';
+import 'package:mobile_user_app/features/crud/get_user/view/user_list_page.dart';
 
 class AddUserPage extends StatelessWidget {
   static const String routeName = '/addUser';
@@ -13,7 +15,23 @@ class AddUserPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text(
+          'Create User',
+          style: TextStyle(color: Colors.black),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Container(
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: colorFill,
+              ),
+              child: const Icon(Icons.close, size: 30)),
+        ),
+      ),
       body: const SafeArea(
         child: AddUserWidget(),
       ),

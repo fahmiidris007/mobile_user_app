@@ -33,9 +33,31 @@ class UserListTile extends StatelessWidget {
           const Spacer(),
           Flexible(
             flex: 1,
-            child: IconButton(
-              icon: const Icon(Icons.more_horiz),
-              onPressed: () {},
+            child: PopupMenuButton(
+              surfaceTintColor: colorFill2,
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  child: ListTile(
+                    title:  Center(child: Text('Select')),
+                    onTap: () {
+
+                    },
+                  ),
+                ),
+                PopupMenuItem(child:
+                  ListTile(
+                    title: Center(child: Text('Update')),
+                    onTap: () {
+                    },
+                  ),),
+                PopupMenuItem(
+                  child: ListTile(
+                    title: Center(child: Text('Delete')),
+                    onTap: () {
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
         ],
