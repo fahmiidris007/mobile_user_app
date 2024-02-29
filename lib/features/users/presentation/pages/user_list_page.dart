@@ -12,11 +12,15 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
+  final _scrollController = ScrollController();
+  late GetUserBloc _getUserBloc;
 
   @override
   void initState() {
     super.initState();
-    context.read<GetUserBloc>().add(GetUser());
+    _getUserBloc = context.read<GetUserBloc>();
+    _getUserBloc.add(GetUser());
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -87,6 +91,17 @@ class _UserListPageState extends State<UserListPage> {
       ],
 
     );
+  }
+
+  void _onScroll() {
+    if (_isBottom) _getUserBloc.add(GetMoreUser());
+  }
+
+  bool get _isBottom {
+    if (!_scrollController.hasClients) return false;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+    final currentScroll = _scrollController.offset;
+    return currentScroll >= (maxScroll * 0.9);
   }
 }
 

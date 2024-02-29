@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => GetUserBloc(crudService: CrudService()),
+          create: (context) => GetUserBloc(userService: UserService()),
         ),
 
       ],
