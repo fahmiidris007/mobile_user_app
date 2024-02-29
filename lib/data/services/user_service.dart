@@ -23,4 +23,30 @@ class UserService{
       throw error.errorMessage;
     }
   }
+
+  Future<AddUser> updateUser(String id, String name, String job)async {
+    try{
+      final response = await ApiClient.instance.put(
+        '${Paths.users}/$id',
+        data: {
+          'id': id,
+          'name': name,
+          'job': job,
+        },
+      );
+      return AddUser.fromJson(response);
+    }on DioException catch(e){
+      var error = ApiErrors(e);
+      throw error.errorMessage;
+    }
+  }
+
+  Future<void> deleteUser(String id) async{
+    try{
+      await ApiClient.instance.delete('${Paths.users}/$id');
+    }on DioException catch(e){
+      var error = ApiErrors(e);
+      throw error.errorMessage;
+    }
+  }
 }

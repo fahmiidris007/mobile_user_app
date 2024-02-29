@@ -63,68 +63,63 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
       if(response.statusCode == 201){
-        print("API success. Response: ${response.data}");
         return response.data;
       }
       throw "network error, please try again";
     } catch(e){
-      print("API error. Error: $e");
       rethrow;
     }
   }
 
   // PUT
-  Future<Map<String, dynamic>> put(
-      String path, {
-        Map<String, dynamic>? data,
+  Future<Map<String, dynamic>> put(String path,
+      {data,
+        Map<String, dynamic>? queryParameters,
         Options? options,
         CancelToken? cancelToken,
         ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress
-      }) async{
-    try{
+        ProgressCallback? onReceiveProgress}) async {
+    try {
       final Response response = await _dio.put(
         path,
         data: data,
+        queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
         onSendProgress: onSendProgress,
         onReceiveProgress: onReceiveProgress,
       );
-      if(response.statusCode == 200){
-        print("API success. Response: ${response.data}");
+      if (response.statusCode == 200) {
+        print("Update Successful. response: ${response.data}");
         return response.data;
       }
       throw "network error, please try again";
-    } catch(e){
-      print("API error. Error: $e");
+    } catch (e) {
       rethrow;
     }
   }
 
   // DELETE
-  Future<Map<String, dynamic>> delete(
-      String path, {
-        Map<String, dynamic>? data,
+  Future<dynamic> delete(String path,
+      {data,
+        Map<String, dynamic>? queryParameters,
         Options? options,
         CancelToken? cancelToken,
         ProgressCallback? onSendProgress,
-        ProgressCallback? onReceiveProgress
-      }) async{
-    try{
+        ProgressCallback? onReceiveProgress}) async {
+    try {
       final Response response = await _dio.delete(
         path,
         data: data,
+        queryParameters: queryParameters,
         options: options,
         cancelToken: cancelToken,
       );
-      if(response.statusCode == 200){
-        print("API success. Response: ${response.data}");
+      if (response.statusCode == 204) {
         return response.data;
       }
       throw "network error, please try again";
-    } catch(e){
-      print("API error. Error: $e");
+    } catch (e) {
       rethrow;
     }
   }

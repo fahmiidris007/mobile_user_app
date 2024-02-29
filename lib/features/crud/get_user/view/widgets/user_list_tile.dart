@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/data/repositories/user_repository.dart';
+import 'package:mobile_user_app/features/crud/update_user/view/update_user_page.dart';
 
 class UserListTile extends StatelessWidget {
   const UserListTile({
@@ -48,6 +49,7 @@ class UserListTile extends StatelessWidget {
                   ListTile(
                     title: Center(child: Text('Update')),
                     onTap: () {
+                      Navigator.pushNamed(context, UpdateUserPage.routeName, arguments: user!.id.toString());
                     },
                   ),),
                 PopupMenuItem(
