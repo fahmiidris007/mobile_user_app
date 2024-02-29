@@ -1,9 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile_user_app/features/users/data/models/user.dart';
-import 'package:mobile_user_app/features/users/data/services/user_service.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_user_app/data/models/user.dart';
+import 'package:mobile_user_app/data/services/user_service.dart';
 part 'get_user_event.dart';
 part 'get_user_state.dart';
 

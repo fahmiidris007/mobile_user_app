@@ -1,11 +1,13 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
-import 'package:mobile_user_app/features/users/presentation/bloc/users/remote/get/get_user_bloc.dart';
-import 'package:mobile_user_app/features/users/presentation/widgets/user_list_tile.dart';
+import 'package:mobile_user_app/features/crud/add_user/view/add_user_page.dart';
+import 'package:mobile_user_app/features/crud/get_user/bloc/get_user_bloc.dart';
+import 'package:mobile_user_app/features/crud/get_user/view/widgets/user_list_tile.dart';
 
 class UserListPage extends StatefulWidget {
+  static const routeName = '/listPage';
+
   const UserListPage({super.key});
 
   @override
@@ -57,9 +59,10 @@ class _UserListPageState extends State<UserListPage> {
       ),
       actions: [
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, AddUserPage.routeName);
+          },
           icon: Container(
-            //circle shape with color colorFill
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
               color: colorFill,

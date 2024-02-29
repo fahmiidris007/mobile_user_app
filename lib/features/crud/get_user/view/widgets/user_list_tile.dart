@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
-import 'package:mobile_user_app/features/users/data/models/user.dart';
+import 'package:mobile_user_app/data/repositories/user_repository.dart';
 
 class UserListTile extends StatelessWidget {
   const UserListTile({

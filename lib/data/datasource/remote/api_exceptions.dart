@@ -1,10 +1,10 @@
 
 import 'package:dio/dio.dart';
 
-class DioErrors implements Exception{
+class ApiErrors implements Exception{
   late String errorMessage;
 
-  DioErrors (DioException dioException){
+  ApiErrors (DioException dioException){
     switch(dioException.type){
       case DioExceptionType.cancel:
         errorMessage = "Request to the server was cancelled.";

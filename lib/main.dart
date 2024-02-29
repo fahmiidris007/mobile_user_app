@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
-import 'package:mobile_user_app/features/users/presentation/bloc/users/remote/get/get_user_bloc.dart';
-import 'package:mobile_user_app/features/users/presentation/pages/user_list_page.dart';
+import 'package:mobile_user_app/data/services/user_service.dart';
+import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_bloc.dart';
+import 'package:mobile_user_app/features/crud/add_user/view/add_user_page.dart';
+import 'package:mobile_user_app/features/crud/get_user/bloc/get_user_bloc.dart';
+import 'package:mobile_user_app/features/crud/get_user/view/user_list_page.dart';
 
-import 'features/users/data/services/user_service.dart';
 
 void main(){
   runApp(const MyApp());
@@ -20,13 +22,19 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => GetUserBloc(userService: UserService()),
         ),
-
+        BlocProvider(
+          create: (context) => AddNewUserBloc(userService: UserService()),
+        ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'User CRUD App',
         debugShowCheckedModeBanner: false,
         theme: theme(),
         home: const UserListPage(),
+        routes: {
+          UserListPage.routeName: (context) => const UserListPage(),
+          AddUserPage.routeName: (context) => const AddUserPage(),
+        }
       ),
     );
   }
