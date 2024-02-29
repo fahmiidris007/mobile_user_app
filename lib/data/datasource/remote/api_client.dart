@@ -90,7 +90,6 @@ class ApiClient {
         onReceiveProgress: onReceiveProgress,
       );
       if (response.statusCode == 200) {
-        print("Update Successful. response: ${response.data}");
         return response.data;
       }
       throw "network error, please try again";
@@ -116,6 +115,7 @@ class ApiClient {
         cancelToken: cancelToken,
       );
       if (response.statusCode == 204) {
+        print("|||| delete success ||||");
         return response.data;
       }
       throw "network error, please try again";

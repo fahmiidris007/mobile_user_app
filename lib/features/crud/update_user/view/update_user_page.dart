@@ -141,7 +141,7 @@ class NewUserDialog extends StatelessWidget {
                   )
               );
             case UpdateUserLoading():
-              return Container();
+              return const CircularProgressIndicator();
           }
           return const Text('Something went wrong');
         });

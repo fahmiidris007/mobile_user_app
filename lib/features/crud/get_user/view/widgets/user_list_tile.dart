@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/data/repositories/user_repository.dart';
+import 'package:mobile_user_app/features/crud/delete_user/bloc/delete_user_bloc.dart';
+import 'package:mobile_user_app/features/crud/delete_user/bloc/delete_user_event.dart';
 import 'package:mobile_user_app/features/crud/update_user/view/update_user_page.dart';
 
 class UserListTile extends StatelessWidget {
@@ -47,15 +50,24 @@ class UserListTile extends StatelessWidget {
                 ),
                 PopupMenuItem(child:
                   ListTile(
-                    title: Center(child: Text('Update')),
+                    title: const Center(child: Text('Update')),
                     onTap: () {
                       Navigator.pushNamed(context, UpdateUserPage.routeName, arguments: user!.id.toString());
                     },
                   ),),
                 PopupMenuItem(
                   child: ListTile(
-                    title: Center(child: Text('Delete')),
+                    title: const Center(child: Text('Delete')),
                     onTap: () {
+                      context.read<DeleteUserBloc>().add(DeleteUser(user!.id.toString()));
+                      if(context.mounted){
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Center(child: Text('User Deleted')),
+                            duration: Duration(seconds: 2),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ),
