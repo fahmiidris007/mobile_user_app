@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 
 class DeletePage extends StatelessWidget {
-  static const String routeName = '/deleteUser';
+  static const String routeName = '/deletePage';
 
   const DeletePage({super.key});
 

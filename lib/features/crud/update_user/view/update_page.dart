@@ -4,9 +4,10 @@ import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/features/crud/update_user/bloc/update_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/update_user/bloc/update_user_event.dart';
 import 'package:mobile_user_app/features/crud/update_user/bloc/update_user_state.dart';
+import 'package:mobile_user_app/features/crud/update_user/view/updated_page.dart';
 
 class UpdateUserPage extends StatelessWidget {
-  static const String routeName = '/updateUser';
+  static const String routeName = '/updatePage';
 
   const UpdateUserPage({Key? key,}) : super(key: key);
 
@@ -81,12 +82,7 @@ class AddUserWidget extends StatelessWidget {
                   ),
                   onPressed: () {
                     context.read<UpdateUserBloc>().add(UpdateUser(id,name.text, job.text));
-                    if (context.mounted) {
-                      showDialog(
-                          context: context,
-                          builder: (context) =>
-                              NewUserDialog(state: state,));
-                    }
+                    Navigator.pushNamed(context, UpdatedPage.routeName);
                   },
                   child: state is UpdateUserLoaded? || state is UpdateUserInitial?
                   const Text("Update User",
@@ -99,51 +95,5 @@ class AddUserWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-class NewUserDialog extends StatelessWidget {
-  const NewUserDialog({
-    super.key,
-    required this.state
-  });
-
-  final UpdateUserState state;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<UpdateUserBloc, UpdateUserState>(
-        builder: (context, state) {
-          switch (state) {
-            case UpdateUserLoaded():
-              return Dialog(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black38,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('ID: ${state.newUser.id}',),
-                                Text('Name: ${state.newUser.name}'),
-                                Text('Job: ${state.newUser.job}'),
-                                Text(
-                                  'Updated at: ${state.newUser.updatedAt}',
-                                )
-                              ]
-                          )
-                      )
-                  )
-              );
-            case UpdateUserLoading():
-              return const CircularProgressIndicator();
-          }
-          return const Text('Something went wrong');
-        });
   }
 }

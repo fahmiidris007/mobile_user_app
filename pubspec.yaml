@@ -42,7 +42,7 @@ dependencies:
   dio: ^5.4.1
 
   # database
-  floor: ^1.4.2
+  sqflite: ^2.3.2
 
   # date formatting
   intl: ^0.19.0

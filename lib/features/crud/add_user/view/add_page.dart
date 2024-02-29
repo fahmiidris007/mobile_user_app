@@ -7,7 +7,7 @@ import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_state.dart'
 import 'package:mobile_user_app/features/crud/get_user/view/list_page.dart';
 
 class AddUserPage extends StatelessWidget {
-  static const String routeName = '/addUser';
+  static const String routeName = '/addPage';
 
   const AddUserPage({Key? key,}) : super(key: key);
 
@@ -81,12 +81,7 @@ class AddUserWidget extends StatelessWidget {
                   ),
                   onPressed: () {
                     context.read<AddNewUserBloc>().add(AddNewUser(name.text, job.text));
-                    if (context.mounted) {
-                      showDialog(
-                          context: context,
-                          builder: (context) =>
-                              NewUserDialog(state: state,));
-                    }
+
                   },
                   child: state is AddNewUserLoaded? || state is AddNewUserInitial?
                   const Text("Create User",
@@ -102,48 +97,3 @@ class AddUserWidget extends StatelessWidget {
   }
 }
 
-class NewUserDialog extends StatelessWidget {
-  const NewUserDialog({
-    super.key,
-    required this.state
-  });
-
-  final AddNewUserState state;
-
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<AddNewUserBloc, AddNewUserState>(
-        builder: (context, state) {
-          switch (state) {
-            case AddNewUserLoaded():
-              return Dialog(
-                  child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.black38,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text('ID: ${state.newUser.id}',),
-                                Text('Name: ${state.newUser.name}'),
-                                Text('Job: ${state.newUser.job}'),
-                                Text(
-                                  'Created at: ${state.newUser.createdAt}',
-                                )
-                              ]
-                          )
-                      )
-                  )
-              );
-            case AddNewUserLoading():
-              return Container();
-          }
-          return const Text('Something went wrong');
-        });
-  }
-}

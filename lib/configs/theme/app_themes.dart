@@ -6,6 +6,7 @@ const Color secondaryColor = Color(0xFFFB6D3A);
 const Color onPrimaryColor = Color(0xFF9C9BA6);
 const Color colorFill = Color(0xFFECF0F4);
 const Color colorFill2 = Color(0xFFF6F8FA);
+const Color deleteColor = Color(0xFFE5E5E5);
 
 ThemeData theme() {
   return ThemeData(

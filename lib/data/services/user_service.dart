@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
+import 'package:mobile_user_app/common/constants/paths.dart';
+import 'package:mobile_user_app/data/datasource/remote/api_client.dart';
+import 'package:mobile_user_app/data/datasource/remote/api_exceptions.dart';
 import 'package:mobile_user_app/data/models/add_user.dart';
-import 'package:mobile_user_app/data/repositories/user_repository.dart';
+import 'package:mobile_user_app/data/models/user.dart';
 
 class UserService{
   Future<List<User>> getUserList({int page = 1, int perPage = 10}) async{

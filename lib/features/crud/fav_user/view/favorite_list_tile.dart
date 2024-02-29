@@ -1,23 +1,21 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/data/models/fav_user.dart';
-import 'package:mobile_user_app/data/models/user.dart';
 import 'package:mobile_user_app/features/crud/delete_user/bloc/delete_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/delete_user/bloc/delete_user_event.dart';
 import 'package:mobile_user_app/features/crud/delete_user/view/delete_page.dart';
-import 'package:mobile_user_app/features/crud/fav_user/bloc/selected_user_bloc.dart';
-import 'package:mobile_user_app/features/crud/fav_user/bloc/selected_user_event.dart';
 import 'package:mobile_user_app/features/crud/update_user/view/update_page.dart';
 
-class UserListTile extends StatelessWidget {
-  const UserListTile({
+class FavListTile extends StatelessWidget {
+  const FavListTile({
     super.key,
     required this.user,
     required this.index,
   });
 
-  final User? user;
+  final FavUser? user;
   final int index;
 
   @override
@@ -25,7 +23,7 @@ class UserListTile extends StatelessWidget {
     return ListTile(
       contentPadding: const EdgeInsets.all(8),
       leading: //image with corner radius 20
-          ClipRRect(
+      ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: Image.network(
           user!.avatar!,
@@ -50,9 +48,6 @@ class UserListTile extends StatelessWidget {
                     title: Center(child: Text('Select')),
                     onTap: () {
                       Navigator.pop(context);
-                      context.read<SelectedUserBloc>().add(
-                            AddSelected(user: FavUser.fromUser(user!)),
-                          );
                     },
                   ),
                 ),
@@ -70,9 +65,9 @@ class UserListTile extends StatelessWidget {
                   child: ListTile(
                     title: const Center(
                         child: Text(
-                      'Delete',
-                      style: TextStyle(color: deleteColor),
-                    )),
+                          'Delete',
+                          style: TextStyle(color: deleteColor),
+                        )),
                     onTap: () {
                       Navigator.pop(context);
                       showModalBottomSheet(
@@ -85,11 +80,11 @@ class UserListTile extends StatelessWidget {
                                   padding: const EdgeInsets.all(16.0),
                                   child: Center(
                                       child: Text(
-                                    'Are you sure ?',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  )),
+                                        'Are you sure ?',
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
+                                      )),
                                 ),
                                 Center(
                                   child: ElevatedButton(
