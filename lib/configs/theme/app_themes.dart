@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 const Color primaryColor = Color(0xFFFFFFFF);
 const Color secondaryColor = Color(0xFFFB6D3A);
 const Color onPrimaryColor = Color(0xFF9C9BA6);
+const Color colorFill = Color(0xFFECF0F4);
 
 ThemeData theme() {
   return ThemeData(

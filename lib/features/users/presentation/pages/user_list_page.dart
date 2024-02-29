@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
@@ -53,7 +54,19 @@ class _UserListPageState extends State<UserListPage> {
             text: 'Selected',
           ),
         ],
-      )
+      ),
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: Container(
+            //circle shape with color colorFill
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorFill,
+            ),
+              child: const Icon(Icons.add, size: 30)),
+        ),
+      ],
     );
   }
 
@@ -65,17 +78,25 @@ class _UserListPageState extends State<UserListPage> {
             if (state is GetUserLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is GetUserLoaded) {
-              return Center(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.user.length,
-                  itemBuilder: (context, index) {
-                    print("Item Count: ${index}");
-                    return UserListTile(
-                      user: state.user[index],
-                      index: index,
-                    );
-                  },
+              return Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 16, 24, 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Total: ${state.user.length} items' , style: TextStyle(color: onPrimaryColor)),
+                    Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: state.user.length,
+                        itemBuilder: (context, index) {
+                          return UserListTile(
+                            user: state.user[index],
+                            index: index,
+                          );
+                        },
+                      ),
+                    ),
+                  ],
                 ),
               );
             } else if (state is GetUserError) {
