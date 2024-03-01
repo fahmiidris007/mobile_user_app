@@ -78,7 +78,7 @@ class FavListTile extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 50, vertical: 20),
                                       ),
-                                      child: Text('DELETE NOW')),
+                                      child: Text('DELETE NOW', style: TextStyle(color: Colors.white))),
                                 ),
                               ],
                             ),
