@@ -9,15 +9,16 @@ import 'package:mobile_user_app/features/crud/update_user/view/updated_page.dart
 class UpdateUserPage extends StatelessWidget {
   static const String routeName = '/updatePage';
 
-  const UpdateUserPage({Key? key,}) : super(key: key);
-
+  const UpdateUserPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Create User',
+          'Update User',
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
@@ -42,7 +43,6 @@ class UpdateUserPage extends StatelessWidget {
 class AddUserWidget extends StatelessWidget {
   const AddUserWidget({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController name = TextEditingController();
@@ -56,9 +56,14 @@ class AddUserWidget extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                const Text("POST", style: TextStyle(color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,),),
+                const Text(
+                  "POST",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -73,21 +78,26 @@ class AddUserWidget extends StatelessWidget {
                   decoration: const InputDecoration(hintText: 'Enter job'),
                   controller: job,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white
+                    backgroundColor: secondaryColor,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 20),
                   ),
                   onPressed: () {
-                    context.read<UpdateUserBloc>().add(UpdateUser(id,name.text, job.text));
+                    context
+                        .read<UpdateUserBloc>()
+                        .add(UpdateUser(id, name.text, job.text));
                     Navigator.pushNamed(context, UpdatedPage.routeName);
                   },
-                  child: state is UpdateUserLoaded? || state is UpdateUserInitial?
-                  const Text("Update User",
-                    style: TextStyle(color: Colors.black, fontSize: 16),)
-                      :const CircularProgressIndicator(),
+                  child: state is UpdateUserLoaded? ||
+                          state is UpdateUserInitial
+                      ? const Text(
+                          "Update User",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      : const CircularProgressIndicator(),
                 )
               ],
             );

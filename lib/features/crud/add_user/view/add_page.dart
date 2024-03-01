@@ -4,17 +4,17 @@ import 'package:mobile_user_app/configs/theme/app_themes.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_bloc.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_event.dart';
 import 'package:mobile_user_app/features/crud/add_user/bloc/add_user_state.dart';
-import 'package:mobile_user_app/features/crud/get_user/view/list_page.dart';
 
 class AddUserPage extends StatelessWidget {
   static const String routeName = '/addPage';
 
-  const AddUserPage({Key? key,}) : super(key: key);
-
+  const AddUserPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Create User',
@@ -42,7 +42,6 @@ class AddUserPage extends StatelessWidget {
 class AddUserWidget extends StatelessWidget {
   const AddUserWidget({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController name = TextEditingController();
@@ -55,9 +54,14 @@ class AddUserWidget extends StatelessWidget {
           builder: (context, state) {
             return Column(
               children: [
-                const Text("POST", style: TextStyle(color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,),),
+                const Text(
+                  "POST",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -72,21 +76,25 @@ class AddUserWidget extends StatelessWidget {
                   decoration: const InputDecoration(hintText: 'Enter job'),
                   controller: job,
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                Spacer(),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white
+                    backgroundColor: secondaryColor,
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 50, vertical: 20),
                   ),
                   onPressed: () {
-                    context.read<AddNewUserBloc>().add(AddNewUser(name.text, job.text));
-
+                    context
+                        .read<AddNewUserBloc>()
+                        .add(AddNewUser(name.text, job.text));
                   },
-                  child: state is AddNewUserLoaded? || state is AddNewUserInitial?
-                  const Text("Create User",
-                    style: TextStyle(color: Colors.black, fontSize: 16),)
-                      :const CircularProgressIndicator(),
+                  child: state is AddNewUserLoaded? ||
+                          state is AddNewUserInitial
+                      ? const Text(
+                          "Create User",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      : const CircularProgressIndicator(),
                 )
               ],
             );
@@ -96,4 +104,3 @@ class AddUserWidget extends StatelessWidget {
     );
   }
 }
-

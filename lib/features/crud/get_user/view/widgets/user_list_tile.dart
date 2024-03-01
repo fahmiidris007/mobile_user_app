@@ -100,7 +100,13 @@ class UserListTile extends StatelessWidget {
                                         Navigator.pushNamed(
                                             context, DeletePage.routeName);
                                       },
-                                      child: Text('DELETE NOW')),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: secondaryColor,
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 50, vertical: 20),
+                                      ),
+                                      child: Text('DELETE NOW',
+                                          style: TextStyle(color: Colors.white)),),
                                 ),
                               ],
                             ),

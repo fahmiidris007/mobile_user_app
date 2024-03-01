@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:mobile_user_app/configs/theme/app_themes.dart';
 
