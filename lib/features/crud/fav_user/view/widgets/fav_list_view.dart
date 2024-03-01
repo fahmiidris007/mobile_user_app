@@ -14,7 +14,7 @@ class FavListView extends StatelessWidget {
     return BlocBuilder<SelectedUserBloc, SelectedUserState>(
       builder: (context, state) {
         if (state is SelectedUserInitial) {
-          return const Center(child: CircularProgressIndicator());
+          return const Center(child: Text('No user selected yet!'));
         } else if (state is SelectedUserLoaded) {
           return ListView.builder(
             itemCount: state.users.length,
