@@ -33,11 +33,6 @@ class DatabaseHelper {
              )''',
         );
       },
-      // onUpgrade: (db, oldVersion, newVersion) {
-      //   if (newVersion > oldVersion) {
-      //     db.execute("ALTER TABLE $_tableName ADD COLUMN last_name TEXT");
-      //   }
-      // },
       version: 1,
     );
 
